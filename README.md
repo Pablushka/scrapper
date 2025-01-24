@@ -1,4 +1,4 @@
-# IFM Vista Scrapper
+# IFM Wells Production Scrapper
 
 This project is designed to scrape data from an OData v3 service, parse the XML response, and store the data into a SQLite database using the Peewee ORM.
 
