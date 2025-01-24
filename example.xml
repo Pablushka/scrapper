@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<feed xml:base="http://datos.energia.gob.ar/datastore/odata3.0/cb5c0f04-7835-45cd-b982-3e25ca7d7751"
+    xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns="http://www.w3.org/2005/Atom">
+    <title type="text">Capítulo IV - Pozos</title>
+    <id>http://datos.energia.gob.ar/datastore/odata3.0/cb5c0f04-7835-45cd-b982-3e25ca7d7751</id>
+    <updated>2025-01-21T05:00:21.286981Z</updated>
+    <link rel="self" title="cb5c0f04-7835-45cd-b982-3e25ca7d7751"
+        href="https://http://datos.energia.gob.ar/datastore/odata3.0//cb5c0f04-7835-45cd-b982-3e25ca7d7751" />
+
+    <entry>
+        <id>http://datos.energia.gob.ar/datastore/odata3.0//cb5c0f04-7835-45cd-b982-3e25ca7d7751(1)</id>
+        <title type="text">ckan</title>
+        <updated>2025-01-21T05:00:21.286981Z</updated>
+        <author>
+            <name>ckan</name>
+        </author>
+        <category term="ckan.odata"
+            scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+        <content type="application/xml">
+            <m:properties>
+
+                <d:empresa m:type="Edm.String">COLHUE HUAPI S.A.</d:empresa>
+
+                <d:sub_tipo_recurso m:type="Edm.String">No informado</d:sub_tipo_recurso>
+
+                <d:tipopozo m:type="Edm.String">Petrolífero</d:tipopozo>
+
+                <d:tipo_recurso m:type="Edm.String">CONVENCIONAL</d:tipo_recurso>
+
+                <d:adjiv_fecha_inicio_perf m:type="Edm.DateTime">1996-10-30T00:00:00</d:adjiv_fecha_inicio_perf>
+
+                <d:tipoestado m:type="Edm.String">Extracción Efectiva</d:tipoestado>
+
+                <d:provincia m:type="Edm.String">Chubut</d:provincia>
+
+                <d:area m:type="Edm.String">ESTANCIA LA ESCONDIDA</d:area>
+
+                <d:formacion m:type="Edm.String">comodoro rivadavia</d:formacion>
+
+                <d:geojson m:type="Edm.String">
+                    {&#34;type&#34;:&#34;Point&#34;,&#34;coordinates&#34;:[-68.287852999999998,-45.591132999999999]}</d:geojson>
+
+                <d:idpozo m:type="Edm.Double">212</d:idpozo>
+
+                <d:adjiv_fecha_fin_perf m:type="Edm.DateTime">1996-11-13T00:00:00</d:adjiv_fecha_fin_perf>
+
+                <d:geom m:type="Edm.String">0101000020E61000008D43FD2E6C1251C00E4B033FAACB46C0</d:geom>
+
+                <d:sigla m:type="Edm.String">CH.CH.EaLE.x-1</d:sigla>
+
+                <d:tipoextraccion m:type="Edm.String">Bombeo Mecánico</d:tipoextraccion>
+
+                <d:subclasificacion m:type="Edm.String">EXPLORACION</d:subclasificacion>
+
+                <d:adjiv_fecha_inicio_term m:type="Edm.DateTime">1996-11-17T00:00:00</d:adjiv_fecha_inicio_term>
+
+                <d:cota m:type="Edm.Double">255</d:cota>
+
+                <d:cuenca m:type="Edm.String">GOLFO SAN JORGE</d:cuenca>
+
+                <d:clasificacion m:type="Edm.String">EXPLORACION</d:clasificacion>
+
+                <d:profundidad m:type="Edm.Double">1702</d:profundidad>
+
+                <d:cod_area m:type="Edm.String">ECH</d:cod_area>
+
+                <d:gasplus m:type="Edm.String">no</d:gasplus>
+
+                <d:cod_yacimiento m:type="Edm.String">ELA</d:cod_yacimiento>
+
+                <d:_id m:type="Edm.String">1</d:_id>
+
+                <d:yacimiento m:type="Edm.String">ESTANCIA LA ESCONDIDA</d:yacimiento>
+
+                <d:adjiv_fecha_fin_term m:type="Edm.DateTime">1996-12-07T00:00:00</d:adjiv_fecha_fin_term>
+
+            </m:properties>
+        </content>
+    </entry>
+
+    <entry>
+        <id>http://datos.energia.gob.ar/datastore/odata3.0//cb5c0f04-7835-45cd-b982-3e25ca7d7751(2)</id>
+        <title type="text">ckan</title>
+        <updated>2025-01-21T05:00:21.286981Z</updated>
+        <author>
+            <name>ckan</name>
+        </author>
+        <category term="ckan.odata"
+            scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+        <content type="application/xml">
+            <m:properties>
+
+                <d:empresa m:type="Edm.String">COLHUE HUAPI S.A.</d:empresa>
+
+                <d:sub_tipo_recurso m:type="Edm.String">No informado</d:sub_tipo_recurso>
+
+                <d:tipopozo m:type="Edm.String">Inyección de Agua</d:tipopozo>
+
+                <d:tipo_recurso m:type="Edm.String">CONVENCIONAL</d:tipo_recurso>
+
+                <d:adjiv_fecha_inicio_perf m:type="Edm.DateTime">1996-10-14T00:00:00</d:adjiv_fecha_inicio_perf>
+
+                <d:tipoestado m:type="Edm.String">En Inyección Efectiva</d:tipoestado>
+
+                <d:provincia m:type="Edm.String">Chubut</d:provincia>
+
+                <d:area m:type="Edm.String">ESTANCIA LA ESCONDIDA</d:area>
+
+                <d:formacion m:type="Edm.String">comodoro rivadavia</d:formacion>
+
+                <d:geojson m:type="Edm.String">
+                    {&#34;type&#34;:&#34;Point&#34;,&#34;coordinates&#34;:[-68.292018999999996,-45.592025]}</d:geojson>
+
+                <d:idpozo m:type="Edm.Double">213</d:idpozo>
+
+                <d:adjiv_fecha_fin_perf m:type="Edm.DateTime">1996-11-13T00:00:00</d:adjiv_fecha_fin_perf>
+
+                <d:geom m:type="Edm.String">0101000020E6100000E1B37570B01251C00BB5A679C7CB46C0</d:geom>
+
+                <d:sigla m:type="Edm.String">CH.CH.EaLE.x-2</d:sigla>
+
+                <d:tipoextraccion m:type="Edm.String">Sin Sistema de Extracción</d:tipoextraccion>
+
+                <d:subclasificacion m:type="Edm.String">EXPLORACION</d:subclasificacion>
+
+                <d:adjiv_fecha_inicio_term m:type="Edm.DateTime">1996-12-09T00:00:00</d:adjiv_fecha_inicio_term>
+
+                <d:cota m:type="Edm.Double">251</d:cota>
+
+                <d:cuenca m:type="Edm.String">GOLFO SAN JORGE</d:cuenca>
+
+                <d:clasificacion m:type="Edm.String">EXPLORACION</d:clasificacion>
+
+                <d:profundidad m:type="Edm.Double">1350</d:profundidad>
+
+                <d:cod_area m:type="Edm.String">ECH</d:cod_area>
+
+                <d:gasplus m:type="Edm.String">no</d:gasplus>
+
+                <d:cod_yacimiento m:type="Edm.String">ELA</d:cod_yacimiento>
+
+                <d:_id m:type="Edm.String">2</d:_id>
+
+                <d:yacimiento m:type="Edm.String">ESTANCIA LA ESCONDIDA</d:yacimiento>
+
+                <d:adjiv_fecha_fin_term m:type="Edm.DateTime">1996-12-17T00:00:00</d:adjiv_fecha_fin_term>
+
+            </m:properties>
+        </content>
+    </entry>
+
+
+    <link rel="next"
+        href="http://datos.energia.gob.ar/datastore/odata3.0//cb5c0f04-7835-45cd-b982-3e25ca7d7751?$skip=2&amp;$top=2" />
+
+</feed>
