@@ -17,12 +17,23 @@ This project is designed to scrape data from an OData v3 service, parse the XML 
     cd IFM/vista/scrapper
     ```
 
-2. **Install dependencies:**
+2. **Create a virtuan environmet
+    ```sh
+    python -m venv .venv
+    ```
+
+3. **Activate de virtual environment**
+    If you use Windows
+    ```sh
+    .\venv\Scripts\activate.ps1
+    ```
+
+4. **Install dependencies:**
     ```sh
     pip install requests peewee
     ```
 
-3. **Create the database:**
+5. **Create the database:**
     ```sh
     python -c "from db.models import create_tables; create_tables()"
     ```
