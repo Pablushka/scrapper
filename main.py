@@ -1,65 +1,34 @@
 import requests
-import xml.etree.ElementTree as ET
-from typing import Dict, Any
+
 from db import models
+from lib.xml_helper import xml_to_dict
 
+# Create the table if does not exists
 models.Well.create_table()
-
-def xml_to_dict(element: ET.Element) -> Dict[str, Any]:
-    """Convert XML to dictionary recursively."""
-    result = {}
-    
-    # Handle attributes
-    if element.attrib:
-        result.update(element.attrib)
-    
-    # Handle children
-    for child in element:
-        # Remove namespace prefix from tags
-        tag = child.tag.split('}')[-1]
-        
-        child_data = xml_to_dict(child)
-        
-        if tag in result:
-            if not isinstance(result[tag], list):
-                result[tag] = [result[tag]]
-            result[tag].append(child_data)
-        else:
-            result[tag] = child_data
-    
-    # Handle text content
-    if element.text and element.text.strip():
-        if result:
-            result['value'] = element.text.strip()
-        else:
-            result = element.text.strip()
-    
-    return result
-
 
 def main():
 
-    # URL del servicio OData v3 (ejemplo)
+    # URL del servicio OData v3
     url = "http://datos.energia.gob.ar/datastore/odata3.0/cb5c0f04-7835-45cd-b982-3e25ca7d7751"
 
     # Parámetros de la consulta OData (opcional)
     params = {
         "$select": "empresa",
         "$orderby": "provincia",
-        "$top": 2,                 # Limitar el número de resultados
-        "$skip": 0,
+        "$top": 500,                 # Limitar el número de resultados
+        "$skip": 1000,
         "$filter": "idpozo eq 214",  # Filtrar productos con precio mayor a 10
     }
 
     # Call GET request
     response = requests.get(url, params=params)
-    print("---------------------------------\n",response.text,"---------------------------------\n")
+    # print("---------------------------------\n",response.text,"---------------------------------\n")
 
     # Verify if the request was successful
     if response.status_code == 200:
         
         # Transform the XML response to a Python dictionary
-        data = xml_to_dict( ET.fromstring(response.content))
+        data = xml_to_dict(response.content)
 
 
         # Process the data
@@ -88,13 +57,11 @@ def main():
                 geom=pozo['geom'].get('value'),
                 cuenca=pozo['cuenca'].get('value'),
                 gasplus=pozo['gasplus'].get('value'),
-
-                
-
             )
+
             print(well)
         
-        print("--\n")
+        print("\n--\n")
         print(record_count)
         print(response.request.url)
         print(response.status_code)

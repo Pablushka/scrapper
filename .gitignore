@@ -1,1 +1,4 @@
 /.venv
+wells.db
+lib/__pycache__/__init__.cpython-312.pyc
+
