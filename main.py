@@ -1,73 +1,82 @@
-import requests
-
+import typer
+import json
 from db import models
 from lib.xml_helper import xml_to_dict
+from typing import Optional
+from rich import print
+from lib.cli_ui import select_companies, print_json_table, select_fields
+from yaspin import yaspin
+from lib.operations import fetch_companies, fetch_data, update_wells, update_operations
+from lib.models_fields import well_field_list, production_field_list
+
+
+app = typer.Typer()
+
 
 # Create the table if does not exists
-models.Well.create_table()
+# models.Well.create_table()
+models.create_tables()
 
-def main():
 
-    # URL del servicio OData v3
-    url = "http://datos.energia.gob.ar/datastore/odata3.0/cb5c0f04-7835-45cd-b982-3e25ca7d7751"
+@app.command()
+def main(limit: int = 500, offset: int = 0):
+    # URL of the OData v3 service
+    wells_url = "http://datos.energia.gob.ar/api/3/action/datastore_search"
 
-    # Parámetros de la consulta OData (opcional)
-    params = {
-        "$select": "empresa",
-        "$orderby": "provincia",
-        "$top": 500,                 # Limitar el número de resultados
-        "$skip": 1000,
-        "$filter": "idpozo eq 214",  # Filtrar productos con precio mayor a 10
+    # Fetch all companies
+    all_companies = fetch_companies(wells_url)
+    # Select companies to process
+    companies = select_companies(all_companies)
+    # columns = select_fields(well_field_list)
+
+    # Parameters for the wells data query
+    wells_params = {
+        "resource_id": "cb5c0f04-7835-45cd-b982-3e25ca7d7751",
+        "fields": well_field_list,
+        "q": "",
+        "filters": json.dumps({"empresa": companies}),
+        "limit": limit,
+        "offset": offset
+    }
+    # Parameters for the production data query
+    production_params = {
+        "resource_id": "b5b58cdc-9e07-41f9-b392-fb9ec68b0725",
+        "fields": production_field_list,
+        "q": "",
+        "filters": json.dumps({"empresa": companies}),
+        "limit": limit,
+        "offset": offset
     }
 
-    # Call GET request
-    response = requests.get(url, params=params)
-    # print("---------------------------------\n",response.text,"---------------------------------\n")
+    # Fetch data with a spinner
+    with yaspin(text="Fetching remote data...", color="green") as spinner:
+        wells = fetch_data(wells_url, wells_params)
+        production = fetch_data(wells_url, production_params)
+        spinner.ok("✔")
 
-    # Verify if the request was successful
-    if response.status_code == 200:
-        
-        # Transform the XML response to a Python dictionary
-        data = xml_to_dict(response.content)
+        # Update wells data
+        wells_count, wells_created, wells_rejected = update_wells(
+            wells, spinner)
+        spinner.write("✔ Wells data fetched successfully.")
 
+        # Update production data
+        production_records_count, production_records_created, production_records_rejected = update_operations(
+            production)
+        spinner.write("✔ Production data fetched successfully.")
 
-        # Process the data
-        record_count = 0
+    # Print summary of wells data processing
+    print(f"\nTotal wells processed: {wells_count}")
+    print(f"Total new wells stored: {wells_created}")
+    print(f"Total wells rejected: {wells_rejected}")
+    print(f"Total wells stored in database: {models.Well.select().count()}")
 
-        for entry in data['entry']:
-            # print("\n")
-            record_count+=1
-            pozo = entry['content']['properties']
+    # Print summary of production data processing
+    print(f"\nTotal production records processed: {production_records_count}")
+    print(f"Total new production records stored: {production_records_created}")
+    print(f"Total production records rejected: {production_records_rejected}")
+    print(
+        f"Total production records stored in database: {models.WellProduction.select().count()}")
 
-            # create a new well object with all the data from pozo
-            
-
-            well = models.Well.create(
-                area=pozo['area'].get('value'),
-                id = pozo['_id'].get('value'),
-                idpozo=pozo['idpozo'].get('value'),
-                empresa=pozo['empresa'].get('value'),
-                provincia=pozo['provincia']['value'],
-                tipo_recurso=pozo['tipo_recurso']['value'],
-                tipopozo=pozo['tipopozo']['value'],
-                sub_tipo_recurso=pozo['sub_tipo_recurso']['value'],
-                cota=pozo['cota'].get('value'),
-                profundidad=pozo['profundidad'].get('value'),
-                geojson=pozo['geojson'].get('value'),
-                geom=pozo['geom'].get('value'),
-                cuenca=pozo['cuenca'].get('value'),
-                gasplus=pozo['gasplus'].get('value'),
-            )
-
-            print(well)
-        
-        print("\n--\n")
-        print(record_count)
-        print(response.request.url)
-        print(response.status_code)
-        print(response.request.headers)
-    else:
-        print(f"Error: {response.status_code} - {response.text}")
 
 if __name__ == "__main__":
-    main()
+    app()
